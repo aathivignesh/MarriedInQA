@@ -17,7 +17,8 @@ with open(credentials_path) as f:
 
 @pytest.mark.parametrize('testdatacredentials', credentialslist)
 def test_frontpagefunc(playwright:Playwright, testdatacredentials):
-    # Run headless in CI/CD environments, otherwise show browser
+    # Run headless in CI/CD environments, otherwise show 
+    #testing
     is_headless = os.getenv('CI', 'false').lower() == 'true' or os.getenv('HEADLESS', 'false').lower() == 'true'
     slow_mo_delay = 100 if is_headless else 1000
     
