@@ -22,6 +22,11 @@ RUN apt-get update && apt-get install -y \
     libxfixes3 \
     libxrender1 \
     libxtst6 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxrandr2 \
+    libgbm1 \
+    libasound2 \
     fonts-noto-color-emoji \
     && rm -rf /var/lib/apt/lists/*
 
