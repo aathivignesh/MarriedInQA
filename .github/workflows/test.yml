@@ -25,8 +25,14 @@ jobs:
           load: true
           tags: marriedinqa:test
 
+      - name: Create reports directory
+        run: mkdir -p reports
+
       - name: Run tests in Docker container
-        run: docker run --rm marriedinqa:test
+        run: docker run --rm -v ${{ github.workspace }}/reports:/app/reports marriedinqa:test
+
+      - name: List reports directory
+        run: ls -la reports/
 
       - name: Upload test results
         if: always()
@@ -34,6 +40,5 @@ jobs:
         with:
           name: test-results
           path: |
-            reports/*.html
+            reports/test_report.html
             **/*.xml
-            **/*.html
