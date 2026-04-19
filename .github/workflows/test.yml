@@ -34,5 +34,6 @@ jobs:
         with:
           name: test-results
           path: |
+            reports/*.html
             **/*.xml
             **/*.html

@@ -39,10 +39,13 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Install Playwright browsers
 RUN playwright install
 
+# Create reports directory
+RUN mkdir -p reports
+
 # Set environment variables for headless testing
 ENV PYTHONUNBUFFERED=1
 ENV HEADLESS=true
 ENV CI=true
 
-# Run the test_frontpage.py script in headless mode
-CMD ["python", "-m", "pytest", "python-scripts/test_frontpage.py", "-v", "--tb=short"]
+# Run the test_frontpage.py script in headless mode with HTML report
+CMD ["python", "-m", "pytest", "python-scripts/test_frontpage.py", "-v", "--tb=short", "--html=reports/test_report.html", "--self-contained-html"]
