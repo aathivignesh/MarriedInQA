@@ -6,7 +6,11 @@ from playwright.sync_api import Playwright, expect
 from test_signinuser import usersignin
 from test_loginuser import userlogin
 
-with open('credentials.json') as f:
+# Get the directory of the current test file
+test_dir = os.path.dirname(os.path.abspath(__file__))
+credentials_path = os.path.join(test_dir, 'credentials.json')
+
+with open(credentials_path) as f:
     test_data = json.load(f)
     print(test_data)
     credentialslist = test_data['usercredentials']
