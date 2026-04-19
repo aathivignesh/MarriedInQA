@@ -36,6 +36,8 @@ RUN playwright install
 
 # Set environment variables for headless testing
 ENV PYTHONUNBUFFERED=1
+ENV HEADLESS=true
+ENV CI=true
 
-# Run the test_frontpage.py script
-CMD ["python", "-m", "pytest", "python-scripts/test_frontpage.py", "-v"]
+# Run the test_frontpage.py script in headless mode
+CMD ["python", "-m", "pytest", "python-scripts/test_frontpage.py", "-v", "--tb=short"]

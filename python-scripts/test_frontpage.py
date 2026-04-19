@@ -1,9 +1,10 @@
 import json
+import os
 
 import pytest
 from playwright.sync_api import Playwright, expect
-from Married.test_signinuser import usersignin
-from Married.test_loginuser import userlogin
+from test_signinuser import usersignin
+from test_loginuser import userlogin
 
 with open('credentials.json') as f:
     test_data = json.load(f)
@@ -12,8 +13,11 @@ with open('credentials.json') as f:
 
 @pytest.mark.parametrize('testdatacredentials', credentialslist)
 def test_frontpagefunc(playwright:Playwright, testdatacredentials):
-
-    browser = playwright.chromium.launch(headless=False, slow_mo=1000)
+    # Run headless in CI/CD environments, otherwise show browser
+    is_headless = os.getenv('CI', 'false').lower() == 'true' or os.getenv('HEADLESS', 'false').lower() == 'true'
+    slow_mo_delay = 100 if is_headless else 1000
+    
+    browser = playwright.chromium.launch(headless=is_headless, slow_mo=slow_mo_delay)
     context = browser.new_context()
     page = context.new_page()
     page.goto("https://stage.marriedin.co/")
