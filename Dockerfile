@@ -46,6 +46,7 @@ RUN mkdir -p reports
 ENV PYTHONUNBUFFERED=1
 ENV HEADLESS=true
 ENV CI=true
+ENV TEST_FLAG=true
 
 # Run the test_frontpage.py script in headless mode with HTML report
 CMD ["python", "-m", "pytest", "python-scripts/test_frontpage.py", "-v", "--tb=short", "--html=reports/test_report.html", "--self-contained-html"]
